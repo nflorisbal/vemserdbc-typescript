@@ -6,7 +6,7 @@ const ListUsers = ({ users }: UsersDTO) => {
     <>
       {users.map((user) => (
         <LineUser key={user.idPessoa}>
-          <div>{user.nome}</div>
+          <div>{user.nome.toUpperCase()}</div>
           <div>{user.dataNascimento}</div>
           <div>{user.cpf}</div>
           <div>{user.email}</div>

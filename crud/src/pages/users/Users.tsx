@@ -1,9 +1,10 @@
 import { useContext, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import ListUsers from '../../components/listusers/ListUsers';
 import { AuthContext } from '../../context/AuthContext';
 import { UserContext } from '../../context/UserContext';
+import ListUsers from '../../components/listusers/ListUsers';
 import Api from '../../services/Api';
+import { Container } from '../../components/container/Container.styles';
 
 const Users = () => {
   const { haveToken } = useContext<any>(AuthContext);
@@ -21,9 +22,9 @@ const Users = () => {
   }, []);
 
   return (
-    <div>
+    <Container>
       <ListUsers users={users} />
-    </div>
+    </Container>
   );
 };
 

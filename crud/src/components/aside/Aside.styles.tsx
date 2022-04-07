@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 
-export const AsideMenu = styled.header`
-  width: 255px;
+export const AsideMenu = styled.aside`
+  position: fixed;
+  width: 250px;
   height: 100vh;
-  padding: 20px 0;
   background-color: #363740;
 `;

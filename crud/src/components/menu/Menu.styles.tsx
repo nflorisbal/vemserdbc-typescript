@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 
 export const ContainerMenu = styled.div`
@@ -13,10 +13,11 @@ export const NavMenu = styled.nav`
   flex-direction: column;
 `;
 
-export const LinkMenu = styled(Link)`
+export const LinkMenu = styled(NavLink)`
   color: #a4a6b3;
   text-decoration: none;
   height: 56px;
+
   :active {
     background-color: #3e4049;
     color: #dde2ff;
@@ -32,4 +33,8 @@ export const BtnLogout = styled.button`
   border: none;
   border-radius: 8px;
   box-shadow: 0px 4px 12px rgba(55, 81, 255, 0.24);
+
+  :hover {
+    background: #3751ff;
+  }
 `;
