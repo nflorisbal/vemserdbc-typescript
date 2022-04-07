@@ -7,7 +7,10 @@ const Address = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (!haveToken()) navigate('/login');
+    if (!haveToken()) {
+      navigate('/login');
+    }
+    // eslint-disable-next-line
   }, []);
 
   return <div>Address</div>;

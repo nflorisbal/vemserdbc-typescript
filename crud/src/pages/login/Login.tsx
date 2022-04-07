@@ -1,43 +1,69 @@
 import { Formik, Form, Field, FormikHelpers } from 'formik';
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import { AuthContext } from '../../context/AuthContext';
 import { LoginDTO } from '../../model/LoginDTO';
-import { ContainerLogin, DivForm, TitleLogin } from './Login.styles';
+import {
+  ContainerLogin,
+  DivLogin,
+  DivForm,
+  TitleLogin,
+  InputForm,
+  LabelLogin,
+  BtnForm,
+  ImgLogin,
+} from './Login.styles';
 
 const Login = () => {
-  const { handleLogin } = useContext<any>(AuthContext);
+  const { haveToken, handleLogin, navigate } = useContext<any>(AuthContext);
+
+  useEffect(() => {
+    if (haveToken()) {
+      navigate('/');
+    }
+    // eslint-disable-next-line
+  }, []);
 
   return (
     <ContainerLogin>
-      <TitleLogin>Login</TitleLogin>
-      <Formik
-        initialValues={{
-          usuario: '',
-          senha: '',
-        }}
-        onSubmit={(
-          values: LoginDTO,
-          { setSubmitting }: FormikHelpers<LoginDTO>
-        ) => {
-          handleLogin(values);
-        }}
-      >
-        <Form>
-          <DivForm>
-            <label htmlFor="usuario">Usuário</label>
-            <Field
-              name="usuario"
-              id="usuario"
-              placeholder="Digite seu usuário"
-            />
-          </DivForm>
-          <DivForm>
-            <label htmlFor="senha">Senha</label>
-            <Field name="senha" id="senha" placeholder="Digite seu senha" />
-          </DivForm>
-          <button type="submit">Entrar</button>
-        </Form>
-      </Formik>
+      <DivLogin>
+        <ImgLogin />
+        <TitleLogin>Log In</TitleLogin>
+        <Formik
+          initialValues={{
+            usuario: '',
+            senha: '',
+          }}
+          onSubmit={(
+            values: LoginDTO,
+            { setSubmitting }: FormikHelpers<LoginDTO>
+          ) => {
+            handleLogin(values);
+          }}
+        >
+          <Form>
+            <DivForm>
+              <LabelLogin htmlFor="usuario">Username</LabelLogin>
+              <Field
+                name="usuario"
+                id="usuario"
+                placeholder="Insert your username"
+                as={InputForm}
+              />
+            </DivForm>
+            <DivForm>
+              <LabelLogin htmlFor="senha">Password</LabelLogin>
+              <Field
+                type="password"
+                name="senha"
+                id="senha"
+                placeholder="Insert your password"
+                as={InputForm}
+              />
+            </DivForm>
+            <BtnForm type="submit">Log In</BtnForm>
+          </Form>
+        </Formik>
+      </DivLogin>
     </ContainerLogin>
   );
 };

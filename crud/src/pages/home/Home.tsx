@@ -4,22 +4,19 @@ import { AuthContext } from '../../context/AuthContext';
 import { Card, CardTitle, Container } from './Home.styles';
 
 const Home = () => {
-  const { haveToken, handleLogout } = useContext<any>(AuthContext);
+  const { haveToken } = useContext<any>(AuthContext);
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (!haveToken()) navigate('/login');
+    if (!haveToken()) {
+      navigate('/login');
+    }
+    // eslint-disable-next-line
   }, []);
 
   return (
     <Container>
-      <Card>
-        <CardTitle>Usuários</CardTitle>
-      </Card>
-      <Card>
-        <CardTitle>Endereços</CardTitle>
-      </Card>
-      <button onClick={() => handleLogout()}>Logout</button>
+      
     </Container>
   );
 };

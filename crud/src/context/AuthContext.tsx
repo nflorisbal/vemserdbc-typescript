@@ -6,17 +6,17 @@ import Api from '../services/Api';
 export const AuthContext = createContext({});
 
 const AuthProvider: FC<any> = ({ children }) => {
-  const [token, setToken] = useState('');
-  const [logged, setLogged] = useState(false);
+  const [token, setToken] = useState<string | null>('');
+  const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
   const handleLogin = async (user: LoginDTO) => {
     try {
       const { data } = await Api.post('/auth', user);
       localStorage.setItem('token', data);
-      setLogged(true);
       setToken(data);
       Api.defaults.headers.common['Authorization'] = data;
+      setLoading(false);
       navigate('/');
     } catch (error) {
       console.log(error);
@@ -25,7 +25,7 @@ const AuthProvider: FC<any> = ({ children }) => {
 
   const handleLogout = () => {
     localStorage.removeItem('token');
-    setLogged(false);
+    setToken(null);
     navigate('/login');
   };
 
@@ -33,9 +33,23 @@ const AuthProvider: FC<any> = ({ children }) => {
     return localStorage.getItem('token');
   };
 
+  // useEffect(() => {
+  //   if (!token) {
+  //     setLoading(false);
+  //     navigate('/login');
+  //   } else {
+  //     Api.defaults.headers.common['Authorization'] = token;
+  //   }
+  //   // eslint-disable-next-line
+  // }, []);
+
+  // if (loading) {
+  //   return <h1>Loading...</h1>;
+  // }
+
   return (
     <AuthContext.Provider
-      value={{ token, haveToken, logged, handleLogin, handleLogout }}
+      value={{ haveToken, handleLogin, handleLogout, loading, token }}
     >
       {children}
     </AuthContext.Provider>
