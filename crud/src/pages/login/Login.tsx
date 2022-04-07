@@ -1,7 +1,9 @@
 import { Formik, Form, Field, FormikHelpers } from 'formik';
 import { useContext, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthContext';
 import { LoginDTO } from '../../model/LoginDTO';
+import Logo from '../../components/logo/Logo';
 import {
   ContainerLogin,
   DivLogin,
@@ -10,11 +12,11 @@ import {
   InputForm,
   LabelLogin,
   BtnForm,
-  ImgLogin,
 } from './Login.styles';
 
 const Login = () => {
-  const { haveToken, handleLogin, navigate } = useContext<any>(AuthContext);
+  const { haveToken, handleLogin } = useContext<any>(AuthContext);
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (haveToken()) {
@@ -26,7 +28,7 @@ const Login = () => {
   return (
     <ContainerLogin>
       <DivLogin>
-        <ImgLogin />
+        <Logo />
         <TitleLogin>Log In</TitleLogin>
         <Formik
           initialValues={{

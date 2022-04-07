@@ -1,7 +1,5 @@
 import styled from 'styled-components';
 
-import logo from '../../images/vemser.jpeg';
-
 export const ContainerLogin = styled.div`
   display: flex;
   justify-content: center;
@@ -21,12 +19,6 @@ export const DivLogin = styled.div`
   background-color: #fff;
   border-radius: 8px;
   border: 1px solid #dfe0eb;
-`;
-
-export const ImgLogin = styled.img.attrs({
-  src: `${logo}`,
-})`
-  width: 100px;
 `;
 
 export const TitleLogin = styled.h1`
@@ -54,7 +46,7 @@ export const InputForm = styled.input`
   border: 1px solid #f0f1f7;
   padding: 10px;
   outline-color: #c6c6c6;
-  
+
   ::placeholder {
     color: #9fa2b4;
   }
