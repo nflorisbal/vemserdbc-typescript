@@ -5,6 +5,7 @@ export const ContainerMenu = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  align-items: center;
   width: 100%;
   height: calc(100vh - 100px);
 `;
@@ -12,6 +13,7 @@ export const ContainerMenu = styled.div`
 export const NavMenu = styled.nav`
   display: flex;
   flex-direction: column;
+  width: 100%;
 `;
 
 export const LinkMenu = styled(NavLink)`
