@@ -3,7 +3,6 @@ import { useContext, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthContext';
 import { LoginDTO } from '../../model/LoginDTO';
-import Logo from '../../components/logo/Logo';
 import {
   ContainerLogin,
   DivLogin,
@@ -13,6 +12,7 @@ import {
   LabelLogin,
 } from './Login.styles';
 import { Button } from '../../components/button/Button.styles';
+import { Logo } from '../../components/logo/Logo.styles';
 
 const Login = () => {
   const { haveToken, handleLogin } = useContext<any>(AuthContext);
@@ -28,7 +28,7 @@ const Login = () => {
   return (
     <ContainerLogin>
       <DivLogin>
-        <Logo />
+        <Logo alt="logo" color='colored'/>
         <TitleLogin>Acesso ao sistema</TitleLogin>
         <Formik
           initialValues={{

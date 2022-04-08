@@ -5,7 +5,8 @@ export const ContainerMenu = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  height: calc(100vh - 120px);
+  width: 100%;
+  height: calc(100vh - 100px);
 `;
 
 export const NavMenu = styled.nav`
@@ -14,11 +15,14 @@ export const NavMenu = styled.nav`
 `;
 
 export const LinkMenu = styled(NavLink)`
+  display: flex;
+  align-items: center;
   color: #a4a6b3;
   text-decoration: none;
   height: 56px;
+  padding-left: 30px;
 
-  :active {
+ :active {
     background-color: #3e4049;
     color: #dde2ff;
     border-left: 3px solid #dde2ff;

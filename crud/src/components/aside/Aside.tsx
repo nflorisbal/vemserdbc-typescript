@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 import { AuthContext } from '../../context/AuthContext';
-import Logo from '../logo/Logo';
+import { Logo } from '../logo/Logo.styles';
 import Menu from '../menu/Menu';
 
 import { AsideMenu } from './Aside.styles';
@@ -10,7 +10,7 @@ const Aside = () => {
   return (
     haveToken() && (
       <AsideMenu>
-        <Logo />
+        <Logo alt="logo" />
         <Menu />
       </AsideMenu>
     )
