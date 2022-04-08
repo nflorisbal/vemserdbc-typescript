@@ -1,5 +1,6 @@
 import { UsersDTO } from '../../model/UsersDTO';
-import { LineUser } from './ListUsers.styles';
+import { ButtonForm } from '../buttonform/ButtonForm.styles';
+import { ButtonsUser, LineUser } from './ListUsers.styles';
 
 const ListUsers = ({ users }: UsersDTO) => {
   return (
@@ -9,7 +10,25 @@ const ListUsers = ({ users }: UsersDTO) => {
           <div>{user.nome.toUpperCase()}</div>
           <div>{user.dataNascimento}</div>
           <div>{user.cpf}</div>
-          <div>{user.email}</div>
+          <div>{user.email.toLocaleLowerCase()}</div>
+          <ButtonsUser>
+            <ButtonForm
+              onClick={() => {
+                console.log('atualizou');
+              }}
+              color="#29CC97"
+            >
+              Atualizar
+            </ButtonForm>
+            <ButtonForm
+              onClick={() => {
+                console.log('removeu');
+              }}
+              color="#F12B2C"
+            >
+              Remover
+            </ButtonForm>
+          </ButtonsUser>
         </LineUser>
       ))}
     </>

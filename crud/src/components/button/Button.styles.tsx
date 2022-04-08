@@ -8,8 +8,8 @@ export const Button = styled.button<{ width: string; height: string }>`
   border: none;
   border-radius: 8px;
   box-shadow: 0px 4px 12px rgba(55, 81, 255, 0.24);
-  transition: .2s linear;
+  transition: 0.2s linear;
   :hover {
-    background: #23339c;
+    filter: brightness(0.7);
   }
 `;

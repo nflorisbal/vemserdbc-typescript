@@ -1,10 +1,10 @@
 import axios from 'axios';
-import { Field, Form, Formik, FormikHelpers } from 'formik';
-import { useContext, useEffect } from 'react';
+import { Field, Form, Formik } from 'formik';
 import { useNavigate } from 'react-router-dom';
-import { Container } from '../../components/container/Container.styles';
+import { useContext, useEffect } from 'react';
 import { AuthContext } from '../../context/AuthContext';
 import { AddressDTO } from '../../model/AddressDTO';
+import { Container } from '../../components/container/Container.styles';
 import Api from '../../services/Api';
 
 const Address = () => {
@@ -27,7 +27,6 @@ const Address = () => {
 
   const sendAddress = async (values: AddressDTO) => {
     const newAddress = {};
-
     try {
       const { data } = await Api.post('', newAddress);
       console.log(data);
@@ -54,10 +53,7 @@ const Address = () => {
           localidade: '',
           uf: '',
         }}
-        onSubmit={(
-          values: AddressDTO,
-          { setSubmitting }: FormikHelpers<AddressDTO>
-        ) => {
+        onSubmit={(values: AddressDTO) => {
           sendAddress(values);
         }}
       >
