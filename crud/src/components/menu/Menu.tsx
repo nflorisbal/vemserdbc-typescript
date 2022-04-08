@@ -1,6 +1,7 @@
 import { useContext } from 'react';
 import { AuthContext } from '../../context/AuthContext';
-import { BtnLogout, ContainerMenu, LinkMenu, NavMenu } from './Menu.styles';
+import { Button } from '../button/Button.styles';
+import { ContainerMenu, LinkMenu, NavMenu } from './Menu.styles';
 
 const Menu = () => {
   const { handleLogout } = useContext<any>(AuthContext);
@@ -12,7 +13,9 @@ const Menu = () => {
         <LinkMenu to="/users">Usuários</LinkMenu>
         <LinkMenu to="/address">Endereços</LinkMenu>
       </NavMenu>
-      <BtnLogout onClick={handleLogout} type='button'>Sair</BtnLogout>
+      <Button onClick={handleLogout} type="button" width="50%" height="40px">
+        Sair
+      </Button>
     </ContainerMenu>
   );
 };

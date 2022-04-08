@@ -1,7 +1,8 @@
 import { useContext, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { Container } from '../../components/container/Container.styles';
 import { AuthContext } from '../../context/AuthContext';
-import { Card, CardTitle, Container } from './Home.styles';
+
 
 const Home = () => {
   const { haveToken } = useContext<any>(AuthContext);
@@ -16,7 +17,7 @@ const Home = () => {
 
   return (
     <Container>
-      
+      <h1>Alguma coisa no futuro</h1>
     </Container>
   );
 };

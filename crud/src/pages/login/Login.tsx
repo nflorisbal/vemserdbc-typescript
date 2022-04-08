@@ -11,8 +11,8 @@ import {
   TitleLogin,
   InputForm,
   LabelLogin,
-  BtnForm,
 } from './Login.styles';
+import { Button } from '../../components/button/Button.styles';
 
 const Login = () => {
   const { haveToken, handleLogin } = useContext<any>(AuthContext);
@@ -29,7 +29,7 @@ const Login = () => {
     <ContainerLogin>
       <DivLogin>
         <Logo />
-        <TitleLogin>Log In</TitleLogin>
+        <TitleLogin>Acesso ao sistema</TitleLogin>
         <Formik
           initialValues={{
             usuario: '',
@@ -44,25 +44,27 @@ const Login = () => {
         >
           <Form>
             <DivForm>
-              <LabelLogin htmlFor="usuario">Username</LabelLogin>
+              <LabelLogin htmlFor="usuario">Usuário</LabelLogin>
               <Field
                 name="usuario"
                 id="usuario"
-                placeholder="Insert your username"
+                placeholder="Insira seu usuário"
                 as={InputForm}
               />
             </DivForm>
             <DivForm>
-              <LabelLogin htmlFor="senha">Password</LabelLogin>
+              <LabelLogin htmlFor="senha">Senha</LabelLogin>
               <Field
                 type="password"
                 name="senha"
                 id="senha"
-                placeholder="Insert your password"
+                placeholder="Insira sua senha"
                 as={InputForm}
               />
             </DivForm>
-            <BtnForm type="submit">Log In</BtnForm>
+            <Button type="submit" width="100%" height="48px">
+              Entrar
+            </Button>
           </Form>
         </Formik>
       </DivLogin>

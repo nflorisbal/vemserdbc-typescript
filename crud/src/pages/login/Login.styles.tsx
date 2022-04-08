@@ -22,7 +22,7 @@ export const DivLogin = styled.div`
 `;
 
 export const TitleLogin = styled.h1`
-  font-size: 40px;
+  font-size: 30px;
   color: #333;
   margin-bottom: 20px;
 `;
@@ -31,6 +31,7 @@ export const DivForm = styled.div`
   display: flex;
   flex-direction: column;
   margin-bottom: 25px;
+  width: 316px;
 `;
 
 export const LabelLogin = styled.label`
@@ -40,7 +41,7 @@ export const LabelLogin = styled.label`
 
 export const InputForm = styled.input`
   height: 42px;
-  width: 316px;
+  width: 100%;
   background-color: #fcfdfe;
   border-radius: 8px;
   border: 1px solid #f0f1f7;
@@ -50,14 +51,4 @@ export const InputForm = styled.input`
   ::placeholder {
     color: #9fa2b4;
   }
-`;
-
-export const BtnForm = styled.button`
-  color: #ffffff;
-  height: 48px;
-  width: 316px;
-  background: #3751ff;
-  border: none;
-  border-radius: 8px;
-  box-shadow: 0px 4px 12px rgba(55, 81, 255, 0.24);
 `;
