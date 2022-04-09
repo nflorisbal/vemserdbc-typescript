@@ -1,8 +1,25 @@
+import Notiflix from 'notiflix';
+import { useContext } from 'react';
+import { UserContext } from '../../context/UserContext';
 import { UsersDTO } from '../../model/UsersDTO';
 import { ButtonForm } from '../buttonform/ButtonForm.styles';
 import { ButtonsUser, LineUser } from './ListUsers.styles';
 
 const ListUsers = ({ users }: UsersDTO) => {
+  const { removeUser } = useContext<any>(UserContext);
+  
+  const handleRemove = (id: number) => {
+    Notiflix.Confirm.show(
+      'Remover Usuário',
+      'Deseja apagar este usuário?',
+      'Sim',
+      'Não',
+      () => {
+        removeUser(id);
+      }
+    );
+  };
+
   return (
     <>
       {users.map((user) => (
@@ -22,7 +39,7 @@ const ListUsers = ({ users }: UsersDTO) => {
             </ButtonForm>
             <ButtonForm
               onClick={() => {
-                console.log('removeu');
+                handleRemove(user.idPessoa);
               }}
               color="#F12B2C"
             >

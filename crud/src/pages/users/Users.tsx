@@ -18,10 +18,10 @@ const Users = () => {
       navigate('/login');
     } else {
       Api.defaults.headers.common['Authorization'] = haveToken();
+      getUsers();
     }
-    getUsers();
     // eslint-disable-next-line
-  }, []);
+  },[]);
 
   return (
     <Container>
