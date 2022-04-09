@@ -19,29 +19,29 @@ const FORM_INITIAL_VALUES = {
   cpf: '',
 };
 
+const userSchema = Yup.object().shape({
+  nome: Yup.string()
+    .matches(/^[ a-zA-ZÀ-ÿ\u00f1\u00d1]*$/g, 'Deve conter apenas letras.')
+    .min(2, 'Mínimo 2 caracteres.')
+    .max(50, 'Máximo 50 caracteres.')
+    .required(REQUIRED_FIELD_MSG),
+
+  email: Yup.string()
+    .email('Deve ser um e-mail válido.')
+    .required(REQUIRED_FIELD_MSG),
+
+  dataNascimento: Yup.string().required(REQUIRED_FIELD_MSG),
+
+  cpf: Yup.string()
+    // .matches(
+    //   /^([0-9]){3}\.([0-9]){3}\.([0-9]){3}-([0-9]){2}$/,
+    //   'Deve seguir o formato 000.000.000-00'
+    // )
+    .required(REQUIRED_FIELD_MSG),
+});
+
 const FormUser = () => {
   const { addUser, users } = useContext<any>(UserContext);
-
-  const userSchema = Yup.object().shape({
-    nome: Yup.string()
-      .matches(/^[ a-zA-ZÀ-ÿ\u00f1\u00d1]*$/g, 'Deve conter apenas letras.')
-      .min(2, 'Mínimo 2 caracteres.')
-      .max(50, 'Máximo 50 caracteres.')
-      .required(REQUIRED_FIELD_MSG),
-
-    email: Yup.string()
-      .email('Deve ser um e-mail válido.')
-      .required(REQUIRED_FIELD_MSG),
-
-    dataNascimento: Yup.string().required(REQUIRED_FIELD_MSG),
-
-    cpf: Yup.string()
-      // .matches(
-      //   /^([0-9]){3}\.([0-9]){3}\.([0-9]){3}-([0-9]){2}$/,
-      //   'Deve seguir o formato 000.000.000-00'
-      // )
-      .required(REQUIRED_FIELD_MSG),
-  });
 
   const handleSubmit = (values: AddUserDTO, actions: any) => {
     addUser(values);

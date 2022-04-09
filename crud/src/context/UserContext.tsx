@@ -8,7 +8,7 @@ export const UserContext = createContext({});
 
 const UserProvider: FC<ReactNode> = ({ children }) => {
   const [users, setUsers] = useState([]);
-  
+
   const addUser = async (values: AddUserDTO) => {
     try {
       values.dataNascimento = moment(
@@ -36,7 +36,7 @@ const UserProvider: FC<ReactNode> = ({ children }) => {
   const getUsers = async () => {
     try {
       const { data } = await Api.get('/pessoa');
-      sortUsers(data)
+      sortUsers(data);
       setUsers(data);
     } catch (error) {
       console.log(error);
