@@ -15,6 +15,7 @@ const UserProvider: FC<ReactNode> = ({ children }) => {
         values.dataNascimento,
         'DD/MM/YYYY'
       ).format('YYYY-MM-DD');
+      values.cpf = values.cpf.replaceAll(/[^\d]/g, '');
       await Api.post('/pessoa', values);
       getUsers();
     } catch (error) {

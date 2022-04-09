@@ -10,6 +10,7 @@ import {
   FormUserField,
   FormUserLabel,
 } from './FormUser.styles';
+import moment from 'moment';
 
 const REQUIRED_FIELD_MSG = 'Campo obrigatório.';
 const FORM_INITIAL_VALUES = {
@@ -21,28 +22,27 @@ const FORM_INITIAL_VALUES = {
 
 const userSchema = Yup.object().shape({
   nome: Yup.string()
+    .required(REQUIRED_FIELD_MSG)
     .matches(/^[ a-zA-ZÀ-ÿ\u00f1\u00d1]*$/, 'Deve conter apenas letras.')
     .min(2, 'Mínimo 2 caracteres.')
-    .max(50, 'Máximo 50 caracteres.')
-    .required(REQUIRED_FIELD_MSG),
+    .max(50, 'Máximo 50 caracteres.'),
 
   email: Yup.string()
-    .email('Deve ser um e-mail válido.')
-    .required(REQUIRED_FIELD_MSG),
+    .required(REQUIRED_FIELD_MSG)
+    .email('Deve ser um e-mail válido.'),
 
   dataNascimento: Yup.string()
-    .min(10, 'Deve ser uma data válida.')
-    .max(10, 'Deve ser uma data válida.')
-    .required(REQUIRED_FIELD_MSG),
+    .required(REQUIRED_FIELD_MSG)
+    .test('dataNascimento', 'Data inválida.', (value) => {
+      return moment(value, 'DDMMYYYY').isValid();
+    }),
 
   cpf: Yup.string()
-    // .matches(
-    //   /^([0-9]){3}\.([0-9]){3}\.([0-9]){3}-([0-9]){2}$/,
-    //   'Deve seguir o formato 000.000.000-00'
-    // )
-    .min(11, 'Deve ser um CPF válido.')
-    .max(11, 'Deve ser um CPF válido.')
-    .required(REQUIRED_FIELD_MSG),
+    .required(REQUIRED_FIELD_MSG)
+    .matches(
+      /^([\d]){3}\.([\d]){3}\.([\d]){3}-([\d]){2}$/,
+      'Deve seguir o formato 000.000.000-00'
+    ),
 });
 
 const FormUser = () => {
