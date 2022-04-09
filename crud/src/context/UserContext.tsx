@@ -1,6 +1,7 @@
 import moment from 'moment';
 import { FC, createContext, useState, ReactNode } from 'react';
 import { AddUserDTO } from '../model/AddUserDTO';
+import { UsersDTO } from '../model/UsersDTO';
 import Api from '../services/Api';
 
 export const UserContext = createContext({});
@@ -35,10 +36,17 @@ const UserProvider: FC<ReactNode> = ({ children }) => {
   const getUsers = async () => {
     try {
       const { data } = await Api.get('/pessoa');
+      sortUsers(data)
       setUsers(data);
     } catch (error) {
       console.log(error);
     }
+  };
+
+  const sortUsers = (data: UsersDTO[]) => {
+    data.sort((a: any, b: any) => {
+      return b.idPessoa - a.idPessoa;
+    });
   };
 
   return (
