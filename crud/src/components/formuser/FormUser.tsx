@@ -21,7 +21,7 @@ const FORM_INITIAL_VALUES = {
 
 const userSchema = Yup.object().shape({
   nome: Yup.string()
-    .matches(/^[ a-zA-ZÀ-ÿ\u00f1\u00d1]*$/g, 'Deve conter apenas letras.')
+    .matches(/^[ a-zA-ZÀ-ÿ\u00f1\u00d1]*$/, 'Deve conter apenas letras.')
     .min(2, 'Mínimo 2 caracteres.')
     .max(50, 'Máximo 50 caracteres.')
     .required(REQUIRED_FIELD_MSG),
@@ -30,13 +30,18 @@ const userSchema = Yup.object().shape({
     .email('Deve ser um e-mail válido.')
     .required(REQUIRED_FIELD_MSG),
 
-  dataNascimento: Yup.string().required(REQUIRED_FIELD_MSG),
+  dataNascimento: Yup.string()
+    .min(10, 'Deve ser uma data válida.')
+    .max(10, 'Deve ser uma data válida.')
+    .required(REQUIRED_FIELD_MSG),
 
   cpf: Yup.string()
     // .matches(
     //   /^([0-9]){3}\.([0-9]){3}\.([0-9]){3}-([0-9]){2}$/,
     //   'Deve seguir o formato 000.000.000-00'
     // )
+    .min(11, 'Deve ser um CPF válido.')
+    .max(11, 'Deve ser um CPF válido.')
     .required(REQUIRED_FIELD_MSG),
 });
 
@@ -54,12 +59,11 @@ const FormUser = () => {
       validationSchema={userSchema}
       onSubmit={handleSubmit}
     >
-      {(props) => (
+      {({ isValid, dirty }) => (
         <FormUserContainer>
           <FormUserLabel htmlFor="nome">Nome:</FormUserLabel>
           <Field
             as={FormUserField}
-            id="nome"
             name="nome"
             placeholder="Digite o nome"
             required
@@ -68,7 +72,6 @@ const FormUser = () => {
           <FormUserLabel htmlFor="email">Email:</FormUserLabel>
           <Field
             as={FormUserField}
-            id="email"
             name="email"
             placeholder="Digite o e-mail"
             type="email"
@@ -80,6 +83,7 @@ const FormUser = () => {
           </FormUserLabel>
           <Field
             as={FormUserField}
+            mask="99/99/9999"
             name="dataNascimento"
             placeholder="00/00/0000"
             required
@@ -88,13 +92,17 @@ const FormUser = () => {
           <FormUserLabel htmlFor="cpf">CPF:</FormUserLabel>
           <Field
             as={FormUserField}
-            id="cpf"
+            mask="999.999.999-99"
             name="cpf"
             placeholder="000.000.000-00"
             required
           />
           <ErrorMessage component={FormUserError} name="cpf" />
-          <ButtonForm color="#3751FF" type="submit">
+          <ButtonForm
+            disabled={!isValid || !dirty}
+            color="#3751FF"
+            type="submit"
+          >
             Enviar
           </ButtonForm>
         </FormUserContainer>

@@ -1,4 +1,5 @@
 import { Form } from 'formik';
+import ReactInputMask from 'react-input-mask';
 import styled from 'styled-components';
 
 export const FormUserContainer = styled(Form)`
@@ -10,9 +11,10 @@ export const FormUserLabel = styled.label`
   margin-left: 5px;
 `;
 
-export const FormUserField = styled.input`
+export const FormUserField = styled(ReactInputMask)`
   height: 30px;
   padding: 5px;
+  margin-bottom: 10px;
   border-radius: 8px;
   border: 1px solid #f0f1f7;
   background-color: #fcfdfe;
@@ -24,3 +26,5 @@ export const FormUserError = styled.span`
   margin-left: 5px;
   margin-bottom: 10px;
 `;
+
+

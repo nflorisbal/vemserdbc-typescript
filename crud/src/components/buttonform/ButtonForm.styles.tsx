@@ -8,7 +8,11 @@ export const ButtonForm = styled.button<{ color: string }>`
   padding: 5px;
   width: 65px;
 
-  :hover {
+  :hover:enabled {
     filter: brightness(0.9);
+  }
+
+  :disabled {
+    background-color: #cacaca;
   }
 `;
