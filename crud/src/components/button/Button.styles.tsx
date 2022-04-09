@@ -9,6 +9,7 @@ export const Button = styled.button<{ width: string; height: string }>`
   border-radius: 8px;
   box-shadow: 0px 4px 12px rgba(55, 81, 255, 0.24);
   transition: 0.2s linear;
+  
   :hover {
     filter: brightness(0.7);
   }

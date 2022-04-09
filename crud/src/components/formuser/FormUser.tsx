@@ -11,6 +11,7 @@ const FormUser = () => {
 
   const userSchema = Yup.object().shape({
     nome: Yup.string()
+      .matches(/^[ a-zA-ZÀ-ÿ\u00f1\u00d1]*$/g, 'Deve conter apenas letras.')
       .min(2, 'Mínimo 2 caracteres.')
       .max(50, 'Máximo 50 caracteres.')
       .required('Campo obrigatório.'),
@@ -21,6 +22,8 @@ const FormUser = () => {
 
     dataNascimento: Yup.string()
       .required('Campo obrigatório'),
+
+    cpf: Yup.string().required('Campo obrigatório'),
   });
 
   return (
@@ -36,7 +39,7 @@ const FormUser = () => {
         addUser(values);
       }}
     >
-      {(props) => (
+      {({errors, touched}) => (
         <FormUserContainer>
           <label htmlFor="nome">Nome:</label>
           <FormUserField
@@ -62,6 +65,7 @@ const FormUser = () => {
             placeholder="00/00/0000"
             required
           />
+          <ErrorMessage name="dataNascimento" />
           <label htmlFor="cpf">CPF:</label>
           <FormUserField
             id="cpf"
@@ -69,6 +73,7 @@ const FormUser = () => {
             placeholder="000.000.000-00"
             required
           />
+          <ErrorMessage name="cpf" />
           <ButtonForm color="#3751FF" type="submit">
             Enviar
           </ButtonForm>
