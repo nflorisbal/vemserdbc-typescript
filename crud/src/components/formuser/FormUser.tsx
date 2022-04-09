@@ -43,18 +43,19 @@ const FormUser = () => {
       .required(REQUIRED_FIELD_MSG),
   });
 
+  const handleSubmit = (values: AddUserDTO, actions: any) => {
+    addUser(values);
+    actions.resetForm();
+  };
+
   return (
     <Formik
       initialValues={FORM_INITIAL_VALUES}
       validationSchema={userSchema}
-      onSubmit={(values: AddUserDTO, actions) => {
-        addUser(values);
-        actions.resetForm();
-      }}
+      onSubmit={handleSubmit}
     >
       {(props) => (
         <FormUserContainer>
-          {console.log(props)}
           <FormUserLabel htmlFor="nome">Nome:</FormUserLabel>
           <FormUserField
             id="nome"
