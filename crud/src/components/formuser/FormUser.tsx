@@ -57,7 +57,6 @@ const FormUser = () => {
           <ErrorMessage name="email" />
           <label htmlFor="dataNascimento">Data de nascimento:</label>
           <FormUserField
-            mask="99/99/9999"
             id="dataNascimento"
             name="dataNascimento"
             placeholder="00/00/0000"
@@ -65,7 +64,6 @@ const FormUser = () => {
           />
           <label htmlFor="cpf">CPF:</label>
           <FormUserField
-            mask="999.999.999-99"
             id="cpf"
             name="cpf"
             placeholder="000.000.000-00"
