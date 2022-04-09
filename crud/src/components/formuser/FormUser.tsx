@@ -1,5 +1,5 @@
 import * as Yup from 'yup';
-import { Formik } from 'formik';
+import { ErrorMessage, Field, Formik } from 'formik';
 import { useContext } from 'react';
 import { UserContext } from '../../context/UserContext';
 import { AddUserDTO } from '../../model/AddUserDTO';
@@ -57,40 +57,43 @@ const FormUser = () => {
       {(props) => (
         <FormUserContainer>
           <FormUserLabel htmlFor="nome">Nome:</FormUserLabel>
-          <FormUserField
+          <Field
+            as={FormUserField}
             id="nome"
             name="nome"
             placeholder="Digite o nome"
             required
           />
-          <FormUserError component="span" name="nome" />
+          <ErrorMessage component={FormUserError} name="nome" />
           <FormUserLabel htmlFor="email">Email:</FormUserLabel>
-          <FormUserField
+          <Field
+            as={FormUserField}
             id="email"
             name="email"
             placeholder="Digite o e-mail"
             type="email"
             required
           />
-          <FormUserError component="span" name="email" />
+          <ErrorMessage component={FormUserError} name="email" />
           <FormUserLabel htmlFor="dataNascimento">
             Data de nascimento:
           </FormUserLabel>
-          <FormUserField
-            id="dataNascimento"
+          <Field
+            as={FormUserField}
             name="dataNascimento"
             placeholder="00/00/0000"
             required
           />
-          <FormUserError component="span" name="dataNascimento" />
+          <ErrorMessage component={FormUserError} name="dataNascimento" />
           <FormUserLabel htmlFor="cpf">CPF:</FormUserLabel>
-          <FormUserField
+          <Field
+            as={FormUserField}
             id="cpf"
             name="cpf"
             placeholder="000.000.000-00"
             required
           />
-          <FormUserError component="span" name="cpf" />
+          <ErrorMessage component={FormUserError} name="cpf" />
           <ButtonForm color="#3751FF" type="submit">
             Enviar
           </ButtonForm>
