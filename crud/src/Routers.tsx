@@ -7,12 +7,14 @@ import Login from './pages/login/Login';
 import NotFound from './pages/notfound/NotFound';
 import Users from './pages/users/Users';
 import UserProvider from './context/UserContext';
+import AddressProvider from './context/AddressContext';
 
 const Routers = () => {
   return (
     <BrowserRouter>
       <AuthProvider>
         <UserProvider>
+          <AddressProvider>
           <Aside />
           <Routes>
             <Route path="*" element={<NotFound />} />
@@ -21,6 +23,7 @@ const Routers = () => {
             <Route path="/users" element={<Users />} />
             <Route path="/address" element={<Address />} />
           </Routes>
+          </AddressProvider>
         </UserProvider>
       </AuthProvider>
     </BrowserRouter>

@@ -3,12 +3,15 @@ import { Field, Form, Formik } from 'formik';
 import { useNavigate } from 'react-router-dom';
 import { useContext, useEffect } from 'react';
 import { AuthContext } from '../../context/AuthContext';
+import { AddressContext } from '../../context/AddressContext';
 import { AddressDTO } from '../../model/AddressDTO';
 import { Container } from '../../components/container/Container.styles';
 import Api from '../../services/Api';
+import { Loading } from 'notiflix';
 
 const Address = () => {
   const { haveToken } = useContext<any>(AuthContext);
+  const { getAddresses, addresses } = useContext<any>(AddressContext);
   const navigate = useNavigate();
 
   const getAddress = async (values: AddressDTO, setFieldValue: any) => {
@@ -38,6 +41,11 @@ const Address = () => {
   useEffect(() => {
     if (!haveToken()) {
       navigate('/login');
+    } else {
+      Loading.standard();
+      Api.defaults.headers.common['Authorization'] = haveToken();
+      getAddresses();
+      console.log(addresses)
     }
     // eslint-disable-next-line
   }, []);

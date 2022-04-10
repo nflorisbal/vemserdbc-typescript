@@ -61,4 +61,5 @@ const ListUsers = ({ users }: UsersDTO) => {
     </>
   );
 };
+
 export default ListUsers;
