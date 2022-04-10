@@ -2,6 +2,7 @@ import { useContext, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Container } from '../../components/container/Container.styles';
 import { AuthContext } from '../../context/AuthContext';
+import { Card } from './Home.styles';
 
 
 const Home = () => {
@@ -17,7 +18,7 @@ const Home = () => {
 
   return (
     <Container>
-      <h1>Alguma coisa no futuro</h1>
+      <Card><h1>Alguma coisa no futuro</h1></Card>
     </Container>
   );
 };

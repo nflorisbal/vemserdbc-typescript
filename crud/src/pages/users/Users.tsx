@@ -7,18 +7,21 @@ import Api from '../../services/Api';
 import { Container } from '../../components/container/Container.styles';
 import FormUser from '../../components/formuser/FormUser';
 import { ContainerUsers } from './Users.styles';
+import { Loading } from 'notiflix';
 
 const Users = () => {
   const { haveToken } = useContext<any>(AuthContext);
-  const { users, getUsers } = useContext<any>(UserContext);
+  const { users, getUsers, setUpdate } = useContext<any>(UserContext);
   const navigate = useNavigate();
 
   useEffect(() => {
     if (!haveToken()) {
       navigate('/login');
     } else {
+      Loading.standard();
       Api.defaults.headers.common['Authorization'] = haveToken();
       getUsers();
+      setUpdate(false);
     }
     // eslint-disable-next-line
   },[]);

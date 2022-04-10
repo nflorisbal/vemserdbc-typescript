@@ -1,13 +1,15 @@
-import Notiflix from 'notiflix';
+import moment from 'moment';
+import Notiflix, { Notify } from 'notiflix';
 import { useContext } from 'react';
 import { UserContext } from '../../context/UserContext';
 import { UsersDTO } from '../../model/UsersDTO';
+
 import { ButtonForm } from '../buttonform/ButtonForm.styles';
 import { ButtonsUser, LineUser } from './ListUsers.styles';
 
 const ListUsers = ({ users }: UsersDTO) => {
-  const { removeUser } = useContext<any>(UserContext);
-  
+  const { getUserById, removeUser, setUpdate } = useContext<any>(UserContext);
+
   const handleRemove = (id: number) => {
     Notiflix.Confirm.show(
       'Remover Usuário',
@@ -16,8 +18,14 @@ const ListUsers = ({ users }: UsersDTO) => {
       'Não',
       () => {
         removeUser(id);
+        Notify.success('Usuário removido com sucesso.');
       }
     );
+  };
+
+  const handleUpdate = async (id: number) => {
+    await getUserById(id);
+    setUpdate(true);
   };
 
   return (
@@ -25,13 +33,15 @@ const ListUsers = ({ users }: UsersDTO) => {
       {users.map((user) => (
         <LineUser key={user.idPessoa}>
           <div>{user.nome.toUpperCase()}</div>
-          <div>{user.dataNascimento}</div>
+          <div>
+            {moment(user.dataNascimento, 'YYYY-MM-DD').format('DD/MM/YYYY')}
+          </div>
           <div>{user.cpf}</div>
           <div>{user.email.toLocaleLowerCase()}</div>
           <ButtonsUser>
             <ButtonForm
               onClick={() => {
-                console.log('atualizou');
+                handleUpdate(user.idPessoa);
               }}
               color="#29CC97"
             >

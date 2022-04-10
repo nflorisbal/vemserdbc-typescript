@@ -1,18 +1,21 @@
 import * as Yup from 'yup';
+import moment from 'moment';
+import { Notify } from 'notiflix';
 import { ErrorMessage, Field, Formik } from 'formik';
 import { useContext } from 'react';
 import { UserContext } from '../../context/UserContext';
 import { AddUserDTO } from '../../model/AddUserDTO';
 import { ButtonForm } from '../buttonform/ButtonForm.styles';
+
 import {
   FormUserContainer,
   FormUserError,
   FormUserField,
   FormUserLabel,
 } from './FormUser.styles';
-import moment from 'moment';
 
 const REQUIRED_FIELD_MSG = 'Campo obrigatório.';
+
 const FORM_INITIAL_VALUES = {
   nome: '',
   email: '',
@@ -46,18 +49,41 @@ const userSchema = Yup.object().shape({
 });
 
 const FormUser = () => {
-  const { addUser, users } = useContext<any>(UserContext);
+  const { addUser, updateUser, user, update, setUpdate } = useContext<any>(UserContext);
 
   const handleSubmit = (values: AddUserDTO, actions: any) => {
-    addUser(values);
+    if (update) {
+      Notify.success('Usuário atualizado com sucesso.');
+      setUpdate(false);
+      updateUser(user.idPessoa, values);
+    } else {
+      addUser(values);
+      Notify.success('Usuário adicionado com sucesso.');
+    }
     actions.resetForm();
+  };
+
+  const maskCpf = (cpf: string) => {
+    return cpf.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, '$1.$2.$3-$4');
   };
 
   return (
     <Formik
-      initialValues={FORM_INITIAL_VALUES}
+      initialValues={
+        !update
+          ? FORM_INITIAL_VALUES
+          : {
+              nome: user.nome,
+              email: user.email,
+              dataNascimento: moment(user.dataNascimento, 'YYYY-MM-DD').format(
+                'DD/MM/YYYY'
+              ),
+              cpf: maskCpf(user.cpf),
+            }
+      }
       validationSchema={userSchema}
       onSubmit={handleSubmit}
+      enableReinitialize={true}
     >
       {({ isValid, dirty }) => (
         <FormUserContainer>
