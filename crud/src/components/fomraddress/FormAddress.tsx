@@ -1,12 +1,11 @@
 import { Field, Form, Formik } from 'formik';
 import { useContext } from 'react';
 import { AddressContext } from '../../context/AddressContext';
-import { AddressDTO } from '../../model/ViaAddressDTO';
+import { AddressDTO } from '../../model/AddressDTO';
 import Api from '../../services/Api';
 
 const FormAddress = () => {
-  const { getViaCepAddress } = useContext<any>(AddressContext)
-  
+  const { getViaCepAddress } = useContext<any>(AddressContext);
 
   const sendAddress = async (values: AddressDTO) => {
     const newAddress = {};
@@ -38,7 +37,9 @@ const FormAddress = () => {
             <Field id="cep" name="cep" placeholder="Digite o CEP" />
             <button
               type="button"
-              onClick={() => getViaCepAddress(props.values, props.setFieldValue)}
+              onClick={() =>
+                getViaCepAddress(props.values, props.setFieldValue)
+              }
             >
               Buscar CEP
             </button>

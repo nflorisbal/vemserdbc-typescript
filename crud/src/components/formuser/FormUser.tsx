@@ -4,7 +4,7 @@ import { Notify } from 'notiflix';
 import { ErrorMessage, Field, Formik } from 'formik';
 import { useContext } from 'react';
 import { UserContext } from '../../context/UserContext';
-import { AddUserDTO } from '../../model/AddUserDTO';
+import { AddUserDTO } from '../../model/UsersDTO';
 import { ButtonForm } from '../buttonform/ButtonForm.styles';
 
 import {

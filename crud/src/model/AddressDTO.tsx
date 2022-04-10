@@ -1,4 +1,4 @@
-export interface AddressDTO {
+export interface AddressesDTO {
   addresses: {
     cep: string;
     cidade: string;
@@ -10,4 +10,13 @@ export interface AddressDTO {
     pais: string;
     tipo: string;
   }[];
+}
+
+export interface AddressDTO {
+  cep: string;
+  logradouro: string;
+  complemento?: string;
+  bairro: string;
+  localidade: string;
+  uf: string;
 }

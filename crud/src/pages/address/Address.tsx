@@ -6,7 +6,7 @@ import { AddressContext } from '../../context/AddressContext';
 import Api from '../../services/Api';
 import FormAddress from '../../components/fomraddress/FormAddress';
 import { Container } from '../../components/container/Container.styles';
-import ListAddress from '../../components/listaddress/ListAddress';
+import ListAddresses from '../../components/listaddresses/ListAddresses';
 import { ContainerAddress } from './Address.styles';
 
 const Address = () => {
@@ -31,7 +31,7 @@ const Address = () => {
         <FormAddress />
       </ContainerAddress>
       <ContainerAddress>
-        <ListAddress addresses={addresses} />
+        <ListAddresses addresses={addresses} />
       </ContainerAddress>
     </Container>
   );

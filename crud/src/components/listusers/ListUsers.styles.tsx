@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const LineUser = styled.div`
+export const LineList = styled.div`
   display: grid;
   grid-template-columns: 2fr 1fr 1fr 2fr 1.5fr;
   align-content: center;
@@ -14,7 +14,7 @@ export const LineUser = styled.div`
   }
 `;
 
-export const ButtonsUser = styled.div`
+export const ButtonsList = styled.div`
   display: flex;
   justify-content: space-evenly;
 `;

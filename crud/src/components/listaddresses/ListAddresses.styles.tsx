@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 
-export const LineAddress = styled.div`
+export const LineList = styled.div`
   display: grid;
-  grid-template-columns: 2fr 1fr 1fr 1fr;
+  grid-template-columns: 2fr 1.5fr 1fr 1fr 1.5fr;
   align-content: center;
   align-items: baseline;
   border-bottom: 1px solid #dfe0eb;
@@ -13,3 +13,10 @@ export const LineAddress = styled.div`
     border: none;
   }
 `;
+
+export const ButtonsList = styled.div`
+  display: flex;
+  justify-content: space-evenly;
+`;
+
+

@@ -1,7 +1,7 @@
 import moment from 'moment';
 import { Loading } from 'notiflix';
 import { FC, createContext, useState, ReactNode } from 'react';
-import { AddUserDTO } from '../model/AddUserDTO';
+import { AddUserDTO } from '../model/UsersDTO';
 import { UsersDTO } from '../model/UsersDTO';
 import Api from '../services/Api';
 

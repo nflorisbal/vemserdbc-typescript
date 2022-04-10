@@ -5,7 +5,8 @@ import { UserContext } from '../../context/UserContext';
 import { UsersDTO } from '../../model/UsersDTO';
 
 import { ButtonForm } from '../buttonform/ButtonForm.styles';
-import { ButtonsUser, LineUser } from './ListUsers.styles';
+import { ButtonsList, LineList } from './ListUsers.styles';
+
 
 const ListUsers = ({ users }: UsersDTO) => {
   const { getUserById, removeUser, setUpdate } = useContext<any>(UserContext);
@@ -31,14 +32,14 @@ const ListUsers = ({ users }: UsersDTO) => {
   return (
     <>
       {users.map((user) => (
-        <LineUser key={user.idPessoa}>
+        <LineList key={user.idPessoa}>
           <div>{user.nome.toUpperCase()}</div>
           <div>
             {moment(user.dataNascimento, 'YYYY-MM-DD').format('DD/MM/YYYY')}
           </div>
           <div>{user.cpf}</div>
           <div>{user.email.toLocaleLowerCase()}</div>
-          <ButtonsUser>
+          <ButtonsList>
             <ButtonForm
               onClick={() => {
                 handleUpdate(user.idPessoa);
@@ -55,8 +56,8 @@ const ListUsers = ({ users }: UsersDTO) => {
             >
               Remover
             </ButtonForm>
-          </ButtonsUser>
-        </LineUser>
+          </ButtonsList>
+        </LineList>
       ))}
     </>
   );

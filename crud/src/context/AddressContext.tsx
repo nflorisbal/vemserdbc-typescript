@@ -1,7 +1,8 @@
 import axios from 'axios';
 import { Loading } from 'notiflix';
 import { createContext, FC, ReactNode, useState } from 'react';
-import { AddressDTO } from '../model/ViaAddressDTO';
+import { AddressDTO } from '../model/AddressDTO';
+
 import Api from '../services/Api';
 
 export const AddressContext = createContext({});
@@ -26,7 +27,6 @@ const AddressProvider: FC<ReactNode> = ({ children }) => {
   const getAddresses = async () => {
     try {
       const { data } = await Api.get('/endereco');
-      console.log(data);
       setAddresses(data);
       Loading.remove();
     } catch (error) {
@@ -35,7 +35,9 @@ const AddressProvider: FC<ReactNode> = ({ children }) => {
   };
 
   return (
-    <AddressContext.Provider value={{ addresses, getAddresses, getViaCepAddress }}>
+    <AddressContext.Provider
+      value={{ addresses, getAddresses, getViaCepAddress }}
+    >
       {children}
     </AddressContext.Provider>
   );
