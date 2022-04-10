@@ -14,6 +14,10 @@ export const NavMenu = styled.nav`
   display: flex;
   flex-direction: column;
   width: 100%;
+
+  svg {
+    margin-right: 20px;
+  }
 `;
 
 export const LinkMenu = styled(NavLink)`

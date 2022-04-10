@@ -1,7 +1,8 @@
 import styled from "styled-components";
 
-export const Card =  styled.div`
+export const Card = styled.div`
   flex-grow: 1;
+  height: 100%;
 `;
 
 export const CardTitle = styled.h1`

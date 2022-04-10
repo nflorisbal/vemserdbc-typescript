@@ -29,9 +29,14 @@ const addressSchema = Yup.object().shape({
 
   complemento: Yup.string(),
 
-  cidade: Yup.string().required(REQUIRED_FIELD_MSG),
+  bairro: Yup.string().required(REQUIRED_FIELD_MSG),
 
-  estado: Yup.string().required(REQUIRED_FIELD_MSG),
+  localidade: Yup.string().required(REQUIRED_FIELD_MSG),
+
+  uf: Yup.string()
+    .required(REQUIRED_FIELD_MSG)
+    .min(2, 'Mínimo 2 caracteres.')
+    .max(2, 'Máximo 2 caracteres.'),
 
   pais: Yup.string().required(REQUIRED_FIELD_MSG),
 
@@ -47,71 +52,68 @@ const FormAddress = () => {
   };
 
   return (
-    <>
-      <Formik
-        initialValues={FORM_INITIAL_VALUES}
-        validationSchema={addressSchema}
-        onSubmit={handleSubmit}
-        enableReinitialize={true}
-      >
-        {({ values, setFieldValue, isValid, dirty }) => (
-          <FormAddressContainer>
-            <FormAddressLabel htmlFor="cep">CEP</FormAddressLabel>
-            <div>
-              <Field as={FormAddressField} mask="99999-999" name="cep" placeholder="00000-000" />
-              <ButtonForm
-                type="button"
-                color="#3751FF"
-                onClick={() => getViaCepAddress(values, setFieldValue)}
-              >
-                Buscar
-              </ButtonForm>
-            </div>
-            <ErrorMessage component={FormAddressError} name="cep" />
-            <FormAddressLabel htmlFor="logradouro">Logradouro</FormAddressLabel>
+    <Formik
+      initialValues={FORM_INITIAL_VALUES}
+      validationSchema={addressSchema}
+      onSubmit={handleSubmit}
+      enableReinitialize={true}
+    >
+      {({ values, setFieldValue, isValid, dirty }) => (
+        <FormAddressContainer>
+          <FormAddressLabel htmlFor="cep">CEP</FormAddressLabel>
+          <div>
             <Field
               as={FormAddressField}
-              name="logradouro"
-              placeholder="Digite o logradouro"
+              mask="99999-999"
+              name="cep"
+              placeholder="00000-000"
             />
-            <ErrorMessage component={FormAddressError} name="logradouro" />
-            <FormAddressLabel htmlFor="complemento">
-              Complemento
-            </FormAddressLabel>
-            <Field
-              as={FormAddressField}
-              name="complemento"
-              placeholder="Digite o complemento"
-            />
-            <ErrorMessage component={FormAddressError} name="complemento" />
-            <FormAddressLabel htmlFor="bairro">Bairro</FormAddressLabel>
-            <Field
-              as={FormAddressField}
-              id="bairro"
-              name="bairro"
-              placeholder="Digite o bairro"
-            />
-            <FormAddressLabel htmlFor="localidade">Cidade</FormAddressLabel>
-            <Field
-              as={FormAddressField}
-              id="localidade"
-              name="localidade"
-              placeholder="Digite a cidade"
-            />
-            <FormAddressLabel htmlFor="uf">UF</FormAddressLabel>
-            <Field
-              as={FormAddressField}
-              id="uf"
-              name="uf"
-              placeholder="Digite a UF"
-            />
-            <ButtonForm color="#3751FF" type="submit">
-              Enviar
+            <ButtonForm
+              type="button"
+              color="#3751FF"
+              onClick={() => getViaCepAddress(values, setFieldValue)}
+            >
+              Buscar
             </ButtonForm>
-          </FormAddressContainer>
-        )}
-      </Formik>
-    </>
+          </div>
+          <ErrorMessage component={FormAddressError} name="cep" />
+          <FormAddressLabel htmlFor="logradouro">Logradouro</FormAddressLabel>
+          <Field
+            as={FormAddressField}
+            name="logradouro"
+            placeholder="Digite o logradouro"
+          />
+          <ErrorMessage component={FormAddressError} name="logradouro" />
+          <FormAddressLabel htmlFor="complemento">Complemento</FormAddressLabel>
+          <Field
+            as={FormAddressField}
+            name="complemento"
+            placeholder="Digite o complemento"
+          />
+          <ErrorMessage component={FormAddressError} name="complemento" />
+          <FormAddressLabel htmlFor="bairro">Bairro</FormAddressLabel>
+          <Field
+            as={FormAddressField}
+            name="bairro"
+            placeholder="Digite o bairro"
+          />
+          <ErrorMessage component={FormAddressError} name="bairro" />
+          <FormAddressLabel htmlFor="localidade">Cidade</FormAddressLabel>
+          <Field
+            as={FormAddressField}
+            name="localidade"
+            placeholder="Digite a cidade"
+          />
+          <ErrorMessage component={FormAddressError} name="localidade" />
+          <FormAddressLabel htmlFor="uf">UF</FormAddressLabel>
+          <Field as={FormAddressField} name="uf" placeholder="Digite a UF" />
+          <ErrorMessage component={FormAddressError} name="uf" />
+          <ButtonForm color="#3751FF" type="submit">
+            Enviar
+          </ButtonForm>
+        </FormAddressContainer>
+      )}
+    </Formik>
   );
 };
 export default FormAddress;
