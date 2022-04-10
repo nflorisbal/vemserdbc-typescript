@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { Loading } from 'notiflix';
 import { createContext, FC, ReactNode, useState } from 'react';
-import { AddressDTO } from '../model/AddressDTO';
+import { AddressDTO, AddressesDTO } from '../model/AddressDTO';
 
 import Api from '../services/Api';
 
@@ -9,6 +9,36 @@ export const AddressContext = createContext({});
 
 const AddressProvider: FC<ReactNode> = ({ children }) => {
   const [addresses, setAddresses] = useState([]);
+
+  const addAddress = async (values: AddressDTO) => {
+    try {
+      console.log(values);
+      // await Api.post('/endereco/1', values);
+      getAddresses();
+    } catch (error) {
+      console.log(error);
+    }
+  }  
+  
+  const removeAddress = async (id: number) => {
+    try {
+      await Api.delete(`/endereco/${id}`);
+      getAddresses();
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const getAddresses = async () => {
+    try {
+      const { data } = await Api.get('/endereco');
+      sortAddresses(data);
+      setAddresses(data);
+      Loading.remove();
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   const getViaCepAddress = async (values: AddressDTO, setFieldValue: any) => {
     try {
@@ -24,19 +54,16 @@ const AddressProvider: FC<ReactNode> = ({ children }) => {
     }
   };
 
-  const getAddresses = async () => {
-    try {
-      const { data } = await Api.get('/endereco');
-      setAddresses(data);
-      Loading.remove();
-    } catch (error) {
-      console.log(error);
-    }
+
+  const sortAddresses = (data: AddressesDTO[]) => {
+    data.sort((a: any, b: any) => {
+      return b.idEndereco - a.idEndereco;
+    });
   };
 
   return (
     <AddressContext.Provider
-      value={{ addresses, getAddresses, getViaCepAddress }}
+      value={{ addresses, addAddress, removeAddress, getAddresses, getViaCepAddress }}
     >
       {children}
     </AddressContext.Provider>

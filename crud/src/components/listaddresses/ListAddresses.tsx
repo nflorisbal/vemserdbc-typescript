@@ -1,10 +1,28 @@
+import Notiflix, { Notify } from 'notiflix';
+import { useContext } from 'react';
+import { AddressContext } from '../../context/AddressContext';
 import { AddressesDTO } from '../../model/AddressDTO';
+
 import { ButtonForm } from '../buttonform/ButtonForm.styles';
 import { ButtonsList, LineList } from './ListAddresses.styles';
 
 const ListAddresses = ({ addresses }: AddressesDTO) => {
+  const { removeAddress } = useContext<any>(AddressContext);
+
+  const handleRemove = (id: number) => {
+    Notiflix.Confirm.show(
+      'Remover Endereço',
+      'Deseja apagar este endereço?',
+      'Sim',
+      'Não',
+      () => {
+        removeAddress(id);
+        Notify.success('Endereço removido com sucesso.');
+      }
+    );
+  };
+
   const handleUpdate = (id: number) => {};
-  const handleRemove = (id: number) => {};
 
   return (
     <>
