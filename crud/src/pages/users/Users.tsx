@@ -1,13 +1,13 @@
-import { useContext, useEffect } from 'react';
+import { Loading } from 'notiflix';
 import { useNavigate } from 'react-router-dom';
+import { useContext, useEffect } from 'react';
 import { AuthContext } from '../../context/AuthContext';
 import { UserContext } from '../../context/UserContext';
-import ListUsers from '../../components/listusers/ListUsers';
 import Api from '../../services/Api';
-import { Container } from '../../components/container/Container.styles';
+import ListUsers from '../../components/listusers/ListUsers';
 import FormUser from '../../components/formuser/FormUser';
+import { Container } from '../../components/container/Container.styles';
 import { ContainerUsers } from './Users.styles';
-import { Loading } from 'notiflix';
 
 const Users = () => {
   const { haveToken } = useContext<any>(AuthContext);
