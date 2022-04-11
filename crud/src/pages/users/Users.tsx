@@ -7,7 +7,7 @@ import Api from '../../services/Api';
 import ListUsers from '../../components/listusers/ListUsers';
 import FormUser from '../../components/formuser/FormUser';
 import { Container } from '../../components/container/Container.styles';
-import { ContainerUsers } from './Users.styles';
+import { ContainerTitle, ContainerUsers } from './Users.styles';
 
 const Users = () => {
   const { haveToken } = useContext<any>(AuthContext);
@@ -24,10 +24,13 @@ const Users = () => {
       setUpdate(false);
     }
     // eslint-disable-next-line
-  },[]);
+  }, []);
 
   return (
     <Container>
+      <ContainerTitle>
+        Cadastro de Usuários
+      </ContainerTitle>
       <ContainerUsers>
         <FormUser />
       </ContainerUsers>

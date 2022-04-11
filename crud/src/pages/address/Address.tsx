@@ -7,7 +7,7 @@ import Api from '../../services/Api';
 import FormAddress from '../../components/fomraddress/FormAddress';
 import { Container } from '../../components/container/Container.styles';
 import ListAddresses from '../../components/listaddresses/ListAddresses';
-import { ContainerAddress } from './Address.styles';
+import { ContainerAddress, ContainerTitle } from './Address.styles';
 
 const Address = () => {
   const { haveToken } = useContext<any>(AuthContext);
@@ -27,6 +27,9 @@ const Address = () => {
 
   return (
     <Container>
+      <ContainerTitle>
+        Cadastro de Endereços
+      </ContainerTitle>
       <ContainerAddress>
         <FormAddress />
       </ContainerAddress>

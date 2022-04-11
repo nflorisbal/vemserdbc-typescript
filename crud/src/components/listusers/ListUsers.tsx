@@ -7,7 +7,6 @@ import { UsersDTO } from '../../model/UsersDTO';
 import { ButtonForm } from '../buttonform/ButtonForm.styles';
 import { ButtonsList, LineList } from './ListUsers.styles';
 
-
 const ListUsers = ({ users }: UsersDTO) => {
   const { getUserById, removeUser, setUpdate } = useContext<any>(UserContext);
 
@@ -31,6 +30,13 @@ const ListUsers = ({ users }: UsersDTO) => {
 
   return (
     <>
+      <LineList>
+        <p>Nome</p>
+        <p>Nascimento</p>
+        <p>CPF</p>
+        <p>E-mail</p>
+        <p>Ações</p>
+      </LineList>
       {users.map((user) => (
         <LineList key={user.idPessoa}>
           <div>{user.nome.toUpperCase()}</div>

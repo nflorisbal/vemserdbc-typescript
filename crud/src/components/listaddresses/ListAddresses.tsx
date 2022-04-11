@@ -26,6 +26,13 @@ const ListAddresses = ({ addresses }: AddressesDTO) => {
 
   return (
     <>
+      <LineList>
+        <p>Logradouro</p>
+        <p>Cidade</p>
+        <p>CEP</p>
+        <p>Tipo</p>
+        <p>Ações</p>
+      </LineList>
       {addresses.map((address) => (
         <LineList key={address.idEndereco}>
           <div>{address.logradouro}</div>
