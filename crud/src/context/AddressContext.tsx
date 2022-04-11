@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { Loading } from 'notiflix';
+import { Loading, Notify } from 'notiflix';
 import { createContext, FC, ReactNode, useState } from 'react';
 import { AddressDTO, AddressesDTO } from '../model/AddressDTO';
 
@@ -12,7 +12,7 @@ const AddressProvider: FC<ReactNode> = ({ children }) => {
 
   const addAddress = async (values: AddressDTO) => {
     const newAddress = {
-      cep: values.cep.replace('-',''),
+      cep: values.cep.replace('-', ''),
       cidade: values.localidade,
       complemento: values.complemento,
       estado: values.uf,
@@ -20,17 +20,17 @@ const AddressProvider: FC<ReactNode> = ({ children }) => {
       numero: 1,
       pais: 'Brasil',
       tipo: values.tipo,
-    }
-    
+    };
+
     try {
-      // console.log(newAddress);
       await Api.post('/endereco/1', newAddress);
+      Notify.success('Endereço adicionado com sucesso.');
       getAddresses();
     } catch (error) {
       console.log(error);
     }
-  }  
-  
+  };
+
   const removeAddress = async (id: number) => {
     try {
       await Api.delete(`/endereco/${id}`);
@@ -65,7 +65,6 @@ const AddressProvider: FC<ReactNode> = ({ children }) => {
     }
   };
 
-
   const sortAddresses = (data: AddressesDTO[]) => {
     data.sort((a: any, b: any) => {
       return b.idEndereco - a.idEndereco;
@@ -74,7 +73,13 @@ const AddressProvider: FC<ReactNode> = ({ children }) => {
 
   return (
     <AddressContext.Provider
-      value={{ addresses, addAddress, removeAddress, getAddresses, getViaCepAddress }}
+      value={{
+        addresses,
+        addAddress,
+        removeAddress,
+        getAddresses,
+        getViaCepAddress,
+      }}
     >
       {children}
     </AddressContext.Provider>
