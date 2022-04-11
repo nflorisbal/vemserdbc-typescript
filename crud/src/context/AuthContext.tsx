@@ -33,20 +33,6 @@ const AuthProvider: FC<ReactNode> = ({ children }) => {
     return localStorage.getItem('token');
   };
 
-  // useEffect(() => {
-  //   if (!token) {
-  //     setLoading(false);
-  //     navigate('/login');
-  //   } else {
-  //     Api.defaults.headers.common['Authorization'] = token;
-  //   }
-  //   // eslint-disable-next-line
-  // }, []);
-
-  // if (loading) {
-  //   return <h1>Loading...</h1>;
-  // }
-
   return (
     <AuthContext.Provider
       value={{ haveToken, handleLogin, handleLogout, loading, token }}

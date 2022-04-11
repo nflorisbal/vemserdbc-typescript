@@ -19,13 +19,20 @@ const FORM_INITIAL_VALUES = {
   complemento: '',
   bairro: '',
   localidade: '',
+  numero: '',
   uf: '',
+  tipo: 'RESIDENCIAL'
 };
 
 const addressSchema = Yup.object().shape({
-  cep: Yup.string().required(REQUIRED_FIELD_MSG),
+  cep: Yup.mixed().required(REQUIRED_FIELD_MSG),
 
   logradouro: Yup.string().required(REQUIRED_FIELD_MSG),
+  
+  numero: Yup.number().required(REQUIRED_FIELD_MSG)
+  .typeError('Digite penas números.')
+  .positive('Valor inválido.')
+  .integer('Valor inválido.'),
 
   complemento: Yup.string(),
 
@@ -33,14 +40,9 @@ const addressSchema = Yup.object().shape({
 
   localidade: Yup.string().required(REQUIRED_FIELD_MSG),
 
-  uf: Yup.string()
-    .required(REQUIRED_FIELD_MSG)
-    .min(2, 'Mínimo 2 caracteres.')
-    .max(2, 'Máximo 2 caracteres.'),
+  uf: Yup.string().required(REQUIRED_FIELD_MSG).min(2, 'Mínimo 2 caracteres.'),
 
-  pais: Yup.string().required(REQUIRED_FIELD_MSG),
-
-  tipo: Yup.string().required(REQUIRED_FIELD_MSG),
+  // pais: Yup.string().required(REQUIRED_FIELD_MSG),
 });
 
 const FormAddress = () => {
@@ -67,6 +69,7 @@ const FormAddress = () => {
               mask="99999-999"
               name="cep"
               placeholder="00000-000"
+              required
             />
             <ButtonForm
               type="button"
@@ -77,6 +80,7 @@ const FormAddress = () => {
             </ButtonForm>
           </div>
           <ErrorMessage component={FormAddressError} name="cep" />
+
           <FormAddressLabel htmlFor="logradouro">Logradouro</FormAddressLabel>
           <Field
             as={FormAddressField}
@@ -84,6 +88,15 @@ const FormAddress = () => {
             placeholder="Digite o logradouro"
           />
           <ErrorMessage component={FormAddressError} name="logradouro" />
+          
+          <FormAddressLabel htmlFor="numero">Número</FormAddressLabel>
+          <Field
+            as={FormAddressField}
+            name="numero"
+            placeholder="Digite o numero"
+          />
+          <ErrorMessage component={FormAddressError} name="numero" />
+
           <FormAddressLabel htmlFor="complemento">Complemento</FormAddressLabel>
           <Field
             as={FormAddressField}
@@ -91,6 +104,7 @@ const FormAddress = () => {
             placeholder="Digite o complemento"
           />
           <ErrorMessage component={FormAddressError} name="complemento" />
+
           <FormAddressLabel htmlFor="bairro">Bairro</FormAddressLabel>
           <Field
             as={FormAddressField}
@@ -98,6 +112,7 @@ const FormAddress = () => {
             placeholder="Digite o bairro"
           />
           <ErrorMessage component={FormAddressError} name="bairro" />
+
           <FormAddressLabel htmlFor="localidade">Cidade</FormAddressLabel>
           <Field
             as={FormAddressField}
@@ -105,10 +120,27 @@ const FormAddress = () => {
             placeholder="Digite a cidade"
           />
           <ErrorMessage component={FormAddressError} name="localidade" />
-          <FormAddressLabel htmlFor="uf">UF</FormAddressLabel>
-          <Field as={FormAddressField} name="uf" placeholder="Digite a UF" />
+          <div>
+          <FormAddressLabel htmlFor="uf">UF </FormAddressLabel>
+          <Field
+            as={FormAddressField}
+            name="uf"
+            placeholder="Digite o estado "
+          />
           <ErrorMessage component={FormAddressError} name="uf" />
-          <ButtonForm color="#3751FF" type="submit">
+
+          <FormAddressLabel htmlFor="tipo">Tipo </FormAddressLabel>
+          <Field as="select" name="tipo">
+            <option value="RESIDENCIAL" >Residencial</option>
+            <option value="COMERCIAL">Comercial</option>
+          </Field>
+          <ErrorMessage component={FormAddressError} name="tipo" />
+          </div>
+          <ButtonForm
+            disabled={!isValid || !dirty}
+            color="#3751FF"
+            type="submit"
+          >
             Enviar
           </ButtonForm>
         </FormAddressContainer>

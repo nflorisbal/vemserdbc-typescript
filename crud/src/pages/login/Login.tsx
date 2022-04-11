@@ -1,4 +1,4 @@
-import { Formik, Form, Field, FormikHelpers } from 'formik';
+import { Formik, Form, Field } from 'formik';
 import { useContext, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthContext';
@@ -13,6 +13,7 @@ import {
 } from './Login.styles';
 import { Button } from '../../components/button/Button.styles';
 import { Logo } from '../../components/logo/Logo.styles';
+import { Loading } from 'notiflix';
 
 const Login = () => {
   const { haveToken, handleLogin } = useContext<any>(AuthContext);
@@ -28,17 +29,15 @@ const Login = () => {
   return (
     <ContainerLogin>
       <DivLogin>
-        <Logo alt="logo" color='colored'/>
+        <Logo alt="logo" color="colored" />
         <TitleLogin>Acesso ao sistema</TitleLogin>
         <Formik
           initialValues={{
             usuario: '',
             senha: '',
           }}
-          onSubmit={(
-            values: LoginDTO,
-            { setSubmitting }: FormikHelpers<LoginDTO>
-          ) => {
+          onSubmit={(values: LoginDTO) => {
+            Loading.standard();
             handleLogin(values);
           }}
         >

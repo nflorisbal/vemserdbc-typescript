@@ -11,9 +11,20 @@ const AddressProvider: FC<ReactNode> = ({ children }) => {
   const [addresses, setAddresses] = useState([]);
 
   const addAddress = async (values: AddressDTO) => {
+    const newAddress = {
+      cep: values.cep.replace('-',''),
+      cidade: values.localidade,
+      complemento: values.complemento,
+      estado: values.uf,
+      logradouro: values.logradouro,
+      numero: 51,
+      pais: 'Brasil',
+      tipo: values.tipo,
+    }
+    
     try {
-      console.log(values);
-      // await Api.post('/endereco/1', values);
+      // console.log(newAddress);
+      await Api.post('/endereco/1', newAddress);
       getAddresses();
     } catch (error) {
       console.log(error);
