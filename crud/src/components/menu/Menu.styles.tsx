@@ -28,7 +28,7 @@ export const LinkMenu = styled(NavLink)`
   height: 56px;
   padding-left: 30px;
 
- :active {
+  :active {
     background-color: #3e4049;
     color: #dde2ff;
     border-left: 3px solid #dde2ff;

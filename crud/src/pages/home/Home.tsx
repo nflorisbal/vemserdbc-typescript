@@ -5,8 +5,7 @@ import { AddressContext } from '../../context/AddressContext';
 import { AuthContext } from '../../context/AuthContext';
 import { UserContext } from '../../context/UserContext';
 import Api from '../../services/Api';
-import { Card } from './Home.styles';
-
+import { Card, CardData, ValueData } from './Home.styles';
 
 const Home = () => {
   const { haveToken } = useContext<any>(AuthContext);
@@ -27,14 +26,16 @@ const Home = () => {
 
   return (
     <Container>
-      <Card><h1>Status do Sistema</h1></Card>
+      <h1>Status do Sistema</h1>
       <Card>
-        <h3>Usuários cadastrados</h3>
-        <p>{ users.length }</p>
-      </Card>
-      <Card>
-        <h3>Endereços cadastrados</h3>
-        <p>{ addresses.length }</p>
+        <CardData>
+          <h3>Usuários cadastrados</h3>
+          <ValueData>{users.length}</ValueData>
+        </CardData>
+        <CardData>
+          <h3>Endereços cadastrados</h3>
+          <ValueData>{addresses.length}</ValueData>
+        </CardData>
       </Card>
     </Container>
   );

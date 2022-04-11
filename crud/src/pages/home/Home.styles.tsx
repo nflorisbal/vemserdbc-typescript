@@ -1,11 +1,18 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const Card = styled.div`
-  flex-grow: 1;
-  height: 100%;
+  display: flex;
 `;
 
-export const CardTitle = styled.h1`
-  color: #333;
-  font-size: 20px;
+export const CardData = styled.div`
+  background-color: #fff;
+  border-radius: 8px;
+  border: 1px solid #dfe0eb;
+  padding: 10px;
+  margin: 10px;
 `;
+
+export const ValueData = styled.p`
+  font-size: 40px;
+  text-align: center;
+`

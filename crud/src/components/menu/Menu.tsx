@@ -10,15 +10,15 @@ const Menu = () => {
   return (
     <ContainerMenu>
       <NavMenu>
-        <LinkMenu to="/" >
+        <LinkMenu to="/">
           <AiOutlineHome />
           Home
         </LinkMenu>
-        <LinkMenu to="/users" >
+        <LinkMenu to="/users">
           <AiOutlineTeam />
           Usuários
         </LinkMenu>
-        <LinkMenu to="/address" >
+        <LinkMenu to="/address">
           <AiOutlineCompass />
           Endereços
         </LinkMenu>
