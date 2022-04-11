@@ -4,7 +4,6 @@ import styled from 'styled-components';
 
 export const FormAddressContainer = styled(Form)`
   display: grid;
-  grid-template-columns: 1fr;
   padding: 10px;
 `;
 
@@ -28,3 +27,11 @@ export const FormAddressError = styled.span`
   margin-bottom: 10px;
 `;
 
+export const FormAddressSelect = styled.select`
+  height: 30px;
+  padding: 5px;
+  margin-bottom: 10px;
+  border-radius: 8px;
+  border: 1px solid #f0f1f7;
+  background-color: #fcfdfe;
+`;

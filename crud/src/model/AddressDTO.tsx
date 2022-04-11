@@ -19,5 +19,6 @@ export interface AddressDTO {
   bairro: string;
   localidade: string;
   uf: string;
-  tipo?: string;
+  numero?: number;
+  tipo: string;
 }

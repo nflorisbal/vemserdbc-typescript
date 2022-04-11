@@ -17,7 +17,7 @@ const AddressProvider: FC<ReactNode> = ({ children }) => {
       complemento: values.complemento,
       estado: values.uf,
       logradouro: values.logradouro,
-      numero: 51,
+      numero: 1,
       pais: 'Brasil',
       tipo: values.tipo,
     }

@@ -8,6 +8,7 @@ import {
   FormAddressError,
   FormAddressField,
   FormAddressLabel,
+  FormAddressSelect,
 } from './FormAddress.styles';
 import { ButtonForm } from '../buttonform/ButtonForm.styles';
 
@@ -19,30 +20,28 @@ const FORM_INITIAL_VALUES = {
   complemento: '',
   bairro: '',
   localidade: '',
-  numero: '',
   uf: '',
-  tipo: 'RESIDENCIAL'
+  tipo: 'RESIDENCIAL',
 };
 
 const addressSchema = Yup.object().shape({
   cep: Yup.mixed().required(REQUIRED_FIELD_MSG),
 
   logradouro: Yup.string().required(REQUIRED_FIELD_MSG),
-  
-  numero: Yup.number().required(REQUIRED_FIELD_MSG)
-  .typeError('Digite penas números.')
-  .positive('Valor inválido.')
-  .integer('Valor inválido.'),
 
   complemento: Yup.string(),
 
   bairro: Yup.string().required(REQUIRED_FIELD_MSG),
 
-  localidade: Yup.string().required(REQUIRED_FIELD_MSG),
+  localidade: Yup.string()
+    .required(REQUIRED_FIELD_MSG)
+    .matches(/^[ a-zA-ZÀ-ÿ\u00f1\u00d1]*$/, 'Deve conter apenas letras.'),
 
-  uf: Yup.string().required(REQUIRED_FIELD_MSG).min(2, 'Mínimo 2 caracteres.'),
-
-  // pais: Yup.string().required(REQUIRED_FIELD_MSG),
+  uf: Yup.string()
+    .required(REQUIRED_FIELD_MSG)
+    .min(2, 'Mínimo 2 caracteres.')
+    .max(2, 'Máximo 2 caracteres.')
+    .matches(/^[ a-zA-ZÀ-ÿ\u00f1\u00d1]*$/, 'Deve conter apenas letras.'),
 });
 
 const FormAddress = () => {
@@ -88,14 +87,6 @@ const FormAddress = () => {
             placeholder="Digite o logradouro"
           />
           <ErrorMessage component={FormAddressError} name="logradouro" />
-          
-          <FormAddressLabel htmlFor="numero">Número</FormAddressLabel>
-          <Field
-            as={FormAddressField}
-            name="numero"
-            placeholder="Digite o numero"
-          />
-          <ErrorMessage component={FormAddressError} name="numero" />
 
           <FormAddressLabel htmlFor="complemento">Complemento</FormAddressLabel>
           <Field
@@ -121,20 +112,20 @@ const FormAddress = () => {
           />
           <ErrorMessage component={FormAddressError} name="localidade" />
           <div>
-          <FormAddressLabel htmlFor="uf">UF </FormAddressLabel>
-          <Field
-            as={FormAddressField}
-            name="uf"
-            placeholder="Digite o estado "
-          />
-          <ErrorMessage component={FormAddressError} name="uf" />
+            <FormAddressLabel htmlFor="uf">UF </FormAddressLabel>
+            <Field
+              as={FormAddressField}
+              name="uf"
+              placeholder="Digite o estado "
+            />
+            <ErrorMessage component={FormAddressError} name="uf" />
 
-          <FormAddressLabel htmlFor="tipo">Tipo </FormAddressLabel>
-          <Field as="select" name="tipo">
-            <option value="RESIDENCIAL" >Residencial</option>
-            <option value="COMERCIAL">Comercial</option>
-          </Field>
-          <ErrorMessage component={FormAddressError} name="tipo" />
+            <FormAddressLabel htmlFor="tipo">Tipo </FormAddressLabel>
+            <Field as={FormAddressSelect} name="tipo">
+              <option value="RESIDENCIAL">Residencial</option>
+              <option value="COMERCIAL">Comercial</option>
+            </Field>
+            <ErrorMessage component={FormAddressError} name="tipo" />
           </div>
           <ButtonForm
             disabled={!isValid || !dirty}
